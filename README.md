@@ -1,19 +1,7 @@
-**DEPRECATED** this action is in maintenance-only mode and will not be
-accepting new features.
-
-Please switch to using [pre-commit.ci] which is faster and has more features.
-
-[pre-commit.ci]: https://pre-commit.ci
-
-___
-
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pre-commit/action/master.svg)](https://results.pre-commit.ci/latest/github/pre-commit/action/master)
-[![Build Status](https://github.com/pre-commit/action/workflows/deploy/badge.svg)](https://github.com/pre-commit/action/actions)
-
-pre-commit/action
+nitrocode/pre-commit-action
 =================
 
-a GitHub action to run [pre-commit](https://pre-commit.com)
+A GitHub action to run [pre-commit](https://pre-commit.com)
 
 ### using this action
 
@@ -34,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
-    - uses: pre-commit/action@v2.0.3
+    - uses: nitrocode/pre-commit-action@v2.1
 ```
 
 This does a few things:
@@ -52,7 +40,7 @@ Here's a sample step configuration that only runs the `flake8` hook against all
 the files (use the template above except for the `pre-commit` action):
 
 ```yaml
-    - uses: pre-commit/action@v2.0.3
+    - uses: nitrocode/pre-commit-action@v2.1
       with:
         extra_args: flake8 --all-files
 ```
@@ -77,9 +65,11 @@ pushing
 next is passing the token to the pre-commit action
 
 ```yaml
-    - uses: pre-commit/action@v2.0.3
+    - uses: nitrocode/pre-commit-action@v2.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        git_user_name: pre-commit
+        git_user_email: pre-commit@example.com
 ```
 
 note that `secrets.GITHUB_TOKEN` is automatically provisioned and will not
