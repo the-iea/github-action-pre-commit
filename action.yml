@@ -1,4 +1,4 @@
-name: pre-commit
+name: cloudposse-pre-commit
 description: run pre-commit and optionally commit back to the pull request
 author: 'Cloud Posse <hello@cloudposse.com>'
 branding:
