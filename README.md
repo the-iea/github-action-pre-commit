@@ -1,4 +1,4 @@
-nitrocode/pre-commit-action
+cloudposse/github-action-pre-commit
 =================
 
 A GitHub action to run [pre-commit](https://pre-commit.com)
@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
-    - uses: nitrocode/pre-commit-action@v2.1.0
+    - uses: cloudposse/github-action-pre-commit@v2.1.1
 ```
 
 This does a few things:
@@ -40,7 +40,7 @@ Here's a sample step configuration that only runs the `flake8` hook against all
 the files (use the template above except for the `pre-commit` action):
 
 ```yaml
-    - uses: nitrocode/pre-commit-action@v2.1.0
+    - uses: cloudposse/github-action-pre-commit@v2.1.1
       with:
         extra_args: flake8 --all-files
 ```
@@ -65,7 +65,7 @@ pushing
 next is passing the token to the pre-commit action
 
 ```yaml
-    - uses: nitrocode/pre-commit-action@v2.1.0
+    - uses: cloudposse/github-action-pre-commit@v2.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         git_user_name: pre-commit
