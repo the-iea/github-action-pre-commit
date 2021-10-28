@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    if: false # disable for now
     name: pr
     runs-on: ubuntu-latest
     steps:
@@ -19,5 +18,4 @@ jobs:
       uses: ./
     - run: make push
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        GH_TOKEN: ${{ secrets.PAT }}
