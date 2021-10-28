@@ -1,5 +1,9 @@
-name: pre-commit
+name: cloudposse-pre-commit
 description: run pre-commit and optionally commit back to the pull request
+author: 'Cloud Posse <hello@cloudposse.com>'
+branding:
+  icon: 'activity'
+  color: 'blue'
 inputs:
   extra_args:
     description: options to pass to pre-commit run
@@ -16,6 +20,10 @@ inputs:
     description: github user email to push with
     required: false
     default: 'pre-commit@example.com'
+  git_commit_message:
+    description: github commit message to push with
+    required: false
+    default: 'pre-commit fixes'
 
 runs:
   using: 'node12'
