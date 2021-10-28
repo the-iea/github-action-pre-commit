@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
-    - uses: cloudposse/github-action-pre-commit@v2.1.1
+    - uses: cloudposse/github-action-pre-commit@v2
 ```
 
 This does a few things:
@@ -40,7 +40,7 @@ Here's a sample step configuration that only runs the `flake8` hook against all
 the files (use the template above except for the `pre-commit` action):
 
 ```yaml
-    - uses: cloudposse/github-action-pre-commit@v2.1.1
+    - uses: cloudposse/github-action-pre-commit@v2
       with:
         extra_args: flake8 --all-files
 ```
@@ -65,11 +65,12 @@ pushing
 next is passing the token to the pre-commit action
 
 ```yaml
-    - uses: cloudposse/github-action-pre-commit@v2.1.1
+    - uses: cloudposse/github-action-pre-commit@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         git_user_name: pre-commit
         git_user_email: pre-commit@example.com
+        git_commit_message: "pre-commit fixes"
 ```
 
 note that `secrets.GITHUB_TOKEN` is automatically provisioned and will not
