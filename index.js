@@ -47,6 +47,7 @@ async function main() {
     const token = core.getInput('token');
     const git_user_name = core.getInput('git_user_name');
     const git_user_email = core.getInput('git_user_email');
+    const git_commit_message = core.getInput('git_commit_message');
     const pr = github.context.payload.pull_request;
     const push = !!token && !!pr;
 
@@ -91,7 +92,7 @@ async function main() {
                 const branch = pr.head.ref;
                 await exec.exec('git', ['checkout', 'HEAD', '-B', branch]);
 
-                await exec.exec('git', ['commit', '-am', 'pre-commit fixes']);
+                await exec.exec('git', ['commit', '-am', git_commit_message]);
                 const url = addToken(pr.head.repo.clone_url, token);
                 await exec.exec('git', ['push', url, 'HEAD']);
             });
