@@ -5,6 +5,8 @@ A GitHub action to run [pre-commit](https://pre-commit.com)
 
 __NOTE:__ This is a fork of [pre-commit/action](https://github.com/pre-commit/action) to add additional features.
 
+Permissions required: `repo` and `workflow`
+
 ### using this action
 
 To use this action, make a file `.github/workflows/pre-commit.yml`.  Here's a
@@ -24,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
-    - uses: cloudposse/github-action-pre-commit@v2
+    - uses: cloudposse/github-action-pre-commit@v2.1.2
 ```
 
 This does a few things:
@@ -42,7 +44,7 @@ Here's a sample step configuration that only runs the `flake8` hook against all
 the files (use the template above except for the `pre-commit` action):
 
 ```yaml
-    - uses: cloudposse/github-action-pre-commit@v2
+    - uses: cloudposse/github-action-pre-commit@v2.1.2
       with:
         extra_args: flake8 --all-files
 ```
@@ -67,7 +69,7 @@ pushing
 next is passing the token to the pre-commit action
 
 ```yaml
-    - uses: cloudposse/github-action-pre-commit@v2
+    - uses: cloudposse/github-action-pre-commit@v2.1.2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         git_user_name: pre-commit
