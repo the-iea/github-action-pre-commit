@@ -20,6 +20,10 @@ inputs:
     description: github user email to push with
     required: false
     default: 'pre-commit@example.com'
+  git_commit_message:
+    description: github commit message to push with
+    required: false
+    default: 'pre-commit fixes'
 
 runs:
   using: 'node12'
