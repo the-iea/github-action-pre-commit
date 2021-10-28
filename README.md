@@ -3,6 +3,8 @@ cloudposse/github-action-pre-commit
 
 A GitHub action to run [pre-commit](https://pre-commit.com)
 
+__NOTE:__ This is a fork of [pre-commit/action](https://github.com/pre-commit/action) to add additional features.
+
 ### using this action
 
 To use this action, make a file `.github/workflows/pre-commit.yml`.  Here's a
