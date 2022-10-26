@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "16": "^0.0.2",
     "@actions/cache": "*",
     "@actions/core": "*",
     "@actions/exec": "*",
