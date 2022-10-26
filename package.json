@@ -2,9 +2,9 @@
   "private": true,
   "dependencies": {
     "16": "^0.0.2",
-    "@actions/core": "*",
-    "@actions/exec": "*",
-    "@actions/github": "*"
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1"
   },
   "devDependencies": {
     "webpack": "^5.74.0",
