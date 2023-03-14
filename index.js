@@ -43,34 +43,14 @@ async function main() {
         '--color=always',
         ...tr.argStringToArray(core.getInput('extra_args')),
     ];
-    const token = core.getInput('token');
-    const git_user_name = core.getInput('git_user_name');
-    const git_user_email = core.getInput('git_user_email');
-    const git_commit_message = core.getInput('git_commit_message');
-
+    // Ignore return code because it exits nonzero if it makes changes
     const ret = await exec.exec('pre-commit', args, {ignoreReturnCode: true});
-
+    // If it exited nonzero, we want to run pre-commit again because it will now exit 0 if the only failures were
+    //  things we could fix automatically. If it exits nonzero again, then we can't fix it automatically and we want
+    //  to fail the action
     if (ret > 0) {
-        // If pre-commit exits nonzero, it means there are either changes to be made or we failed a test
-        // So we want to run pre-commit again to make sure we're good
-        // This time when we run pre-commit, if we get a nonzero exit code, we want to fail the action
-        // because it means that more is failing than we can automatically fix
         await exec.exec('pre-commit', args);
-        // If we get here, we know that pre-commit is happy, and we can push our changes
-
-        const diff = await exec.exec(
-            'git', ['diff', '--quiet'], {ignoreReturnCode: true}
-        );
-        if (diff > 0) {
-            await core.group('push fixes', async () => {
-                await exec.exec('git', ['config', 'user.name', git_user_name]);
-                await exec.exec(
-                    'git', ['config', 'user.email', git_user_email]
-                );
-                await exec.exec('git', ['commit', '-am', git_commit_message]);
-                await exec.exec('git', ['push']);
-            });
-        }
+        // If we get here, we know that pre-commit is happy, so we succeed
     }
 }
 

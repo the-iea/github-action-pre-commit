@@ -1,6 +1,6 @@
-name: cloudposse-pre-commit
-description: run pre-commit and optionally commit back to the pull request
-author: 'Cloud Posse <hello@cloudposse.com>'
+name: iea-pre-commit
+description: run pre-commit to auto-fix as much as we can
+author: 'Connor Bell'
 branding:
   icon: 'activity'
   color: 'blue'
@@ -9,21 +9,6 @@ inputs:
     description: options to pass to pre-commit run
     required: false
     default: '--all-files'
-  token:
-    description: github token to clone / push with
-    required: false
-  git_user_name:
-    description: github user name to push with
-    required: false
-    default: 'Pre-Commit'
-  git_user_email:
-    description: github user email to push with
-    required: false
-    default: 'pre-commit@the-iea.org'
-  git_commit_message:
-    description: github commit message to push with
-    required: false
-    default: 'Pre-commit auto-fixes'
 
 runs:
   using: 'node16'
