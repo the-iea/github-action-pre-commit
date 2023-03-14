@@ -15,15 +15,15 @@ inputs:
   git_user_name:
     description: github user name to push with
     required: false
-    default: 'pre-commit'
+    default: 'Pre-Commit'
   git_user_email:
     description: github user email to push with
     required: false
-    default: 'pre-commit@example.com'
+    default: 'pre-commit@the-iea.org'
   git_commit_message:
     description: github commit message to push with
     required: false
-    default: 'pre-commit fixes'
+    default: 'Pre-commit auto-fixes'
 
 runs:
   using: 'node16'

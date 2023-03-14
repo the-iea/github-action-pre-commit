@@ -47,33 +47,28 @@ async function main() {
     const git_user_name = core.getInput('git_user_name');
     const git_user_email = core.getInput('git_user_email');
     const git_commit_message = core.getInput('git_commit_message');
-    const pr = github.context.payload.pull_request;
-    const push = !!token && !!pr;
 
-    const ret = await exec.exec('pre-commit', args, {ignoreReturnCode: push});
+    const ret = await exec.exec('pre-commit', args, {ignoreReturnCode: true});
 
-    if (ret && push) {
-        // actions do not run on pushes made by actions.
-        // need to make absolute sure things are good before pushing
-        // TODO: is there a better way around this limitation?
+    if (ret > 0) {
+        // If pre-commit exits nonzero, it means there are either changes to be made or we failed a test
+        // So we want to run pre-commit again to make sure we're good
+        // This time when we run pre-commit, if we get a nonzero exit code, we want to fail the action
+        // because it means that more is failing than we can automatically fix
         await exec.exec('pre-commit', args);
+        // If we get here, we know that pre-commit is happy, and we can push our changes
 
         const diff = await exec.exec(
             'git', ['diff', '--quiet'], {ignoreReturnCode: true}
         );
-        if (diff) {
+        if (diff > 0) {
             await core.group('push fixes', async () => {
                 await exec.exec('git', ['config', 'user.name', git_user_name]);
                 await exec.exec(
                     'git', ['config', 'user.email', git_user_email]
                 );
-
-                const branch = pr.head.ref;
-                await exec.exec('git', ['checkout', 'HEAD', '-B', branch]);
-
                 await exec.exec('git', ['commit', '-am', git_commit_message]);
-                const url = addToken(pr.head.repo.clone_url, token);
-                await exec.exec('git', ['push', url, 'HEAD']);
+                await exec.exec('git', ['push']);
             });
         }
     }
